@@ -1,1 +1,74 @@
-I will place my configurations here. 
+Small Office Network Model Configurations:
+#Set static IP adresses.
+Web Server 192.168.1.11  
+Mail Server 192.168.1.12
+Database Server 192.168.1.13
+File Server 192.168.1.14
+#Using a straight cable (ethernet RJ-45) and connect the servers to a switch, to connect to the router.
+Cable end on switch G 0/1 to router G 0/0/1 
+
+#I thought it was valuable to include my mispelling and mistakes for learning purposes. Below is the Switch to router configuration
+Switch>config t
+^% Invalid input detected at '^' marker.
+	Switch>configure terminal
+^% Invalid input detected at '^' marker.
+	Switch>enable
+Switch#configure terminal
+Enter configuration commands, one per line.  End with CNTL/Z.
+Switch(config)#int Fa0/1
+Switch(config-if)#ip address 192.168.1.11 255.255.255.0
+  ^% Invalid input detected at '^' marker.
+	Switch(config-if)#int Fa0/1
+Switch(config-if)#ip address 192.168.1.11
+  ^% Invalid input detected at '^' marker.
+	Switch(config-if)#configure terminal
+ ^% Invalid input detected at '^' marker.
+	Switch(config-if)#exit
+Switch(config)#int vlan 1
+Switch(config-if)#ip address 192.168.1.2 255.255.255.0
+Switch(config-if)#no shutdown
+Switch(config-if)#
+%LINK-5-CHANGED: Interface Vlan1, changed state to up
+%LINEPROTO-5-UPDOWN: Line protocol on Interface Vlan1, changed state to up
+Switch(config)#exit
+Switch#
+%SYS-5-CONFIG_I: Configured from console by console
+Switch#enable
+Switch#configure terminal
+Enter configuration commands, one per line.  End with CNTL/Z.
+Switch(config)#int g0/1
+Switch(config-if)#switchport mode access
+Switch(config-if)#switchport access vlan 1
+Switch(config-if)#no shutdown
+Switch(config-if)#exit
+Switch(config)#
+   
+  ## these are early part of setting up the connections from the servers to the router. ##
+#Router Configurations
+Router>enable
+Router#
+Router#configure terminal
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#
+Router(config)#
+Router(config)#
+Router(config)#
+Router(config)#interface GigabitEthernet0/0/1
+Router(config-if)#no shutdown
+  Router(config-if)#
+%LINK-5-CHANGED: Interface GigabitEthernet0/0/1, changed state to up
+%LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/0/1, changed state to up
+Router(config-if)#int G0/0/1 ip address 192.168.1.1 255.255.255.0
+                   ^% Invalid input detected at '^' marker.
+	Router(config-if)#int G0/0/1
+Router(config-if)#ip address 192.168.1.1 255.255.255.0
+Router(config-if)#no shutdown
+Router(config-if)#exit
+  ##Verified connection##
+Ping servers to router
+Ping servers to servers
+ping router to switch 
+ping router to servers
+  ## Successful Reply !!!!! 
+to be continued...
+
