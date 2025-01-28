@@ -1,4 +1,3 @@
-Small Office Network Model Configurations:
 #Set static IP adresses.
 Web Server 192.168.1.11  
 Mail Server 192.168.1.12
@@ -70,5 +69,23 @@ Ping servers to servers
 ping router to switch 
 ping router to servers
   ## Successful Reply !!!!! 
-to be continued...
+
+ ##Configuring the Router##
+Router>enable
+Router#config t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#ip access-list extended OfficeFirewall
+Router(config-ext-nacl)#ip access-list extended OfficeFirewall
+Router(config-ext-nacl)#permit tcp any host 192.168.1.11 eq 80
+Router(config-ext-nacl)#permit tcp any host 192.168.1.11 eq 443
+Router(config-ext-nacl)#permit tcp any host 192.168.1.14 eq 445
+Router(config-ext-nacl)#permit tcp any host 192.168.1.14 eq 21
+Router(config-ext-nacl)#permit tcp any host 192.168.1.13 eq 3306
+Router(config-ext-nacl)#permit tcp any host 192.168.1.12 eq 25
+Router(config-ext-nacl)#permit tcp any host 192.168.1.12 eq 110
+Router(config-ext-nacl)#permit tcp any host 192.168.1.12 eq 143
+Router(config-ext-nacl)#deny ip any any
+Router(config-ext-nacl)#exit 
+Router(config)#
+
 
